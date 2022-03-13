@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel : ViewModel() {
-    lateinit var person: MutableLiveData<Person>
+    val person: MutableLiveData<Person>
     init {
         person = MutableLiveData()
     }
@@ -28,11 +28,10 @@ class MainViewModel : ViewModel() {
             .subscribe(getPersonObserverRx())
     }
 
-    fun getPersonObserverRx(): Observer<Person>{
+    private fun getPersonObserverRx(): Observer<Person>{
         return object : Observer<Person>{
             override fun onSubscribe(d: Disposable) {
             }
-
             override fun onNext(t: Person) {
                 person.postValue(t)
             }
